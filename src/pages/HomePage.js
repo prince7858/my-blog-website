@@ -1,6 +1,8 @@
 // pages/HomePage.js
+import Hero from '../components/Hero';
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import BlogPreview from '../components/BlogPreview';
 import { Link } from 'react-router-dom';
 
 const HomeContainer = styled.div`
@@ -30,11 +32,17 @@ const BlogTitle = styled.h2`
 `;
 
 const HomePage = () => {
-  const [posts, setPosts] = useState([
-    { id: 1, title: 'Understanding JavaScript Closures', content: 'Full article about closures...' },
-    { id: 2, title: 'Styling Components in React', content: 'Full article about styling...' },
-    { id: 3, title: 'Building Responsive Layouts', content: 'Full article about responsive design...' },
-  ]);
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    // Fetch posts from an API or use static posts
+    const fetchedPosts = [
+      { id: 1, title: 'Understanding JavaScript Closures', content: 'Full article about closures...' },
+      { id: 2, title: 'Styling Components in React', content: 'Full article about styling...' },
+    ];
+    setPosts(fetchedPosts);
+  }, []);
+
   const [searchTerm, setSearchTerm] = useState('');
   
   const [showTopBtn, setShowTopBtn] = useState(false);
@@ -62,6 +70,7 @@ const goToTop = () => {
 
   return (
     <HomeContainer>
+      <Hero />
       <h1>Welcome You</h1>
       <p>Explore my latest posts on web development, frontend, and more!</p>
       
@@ -75,7 +84,7 @@ const goToTop = () => {
 
       <BlogContainer>
         {filteredPosts.map(post => (
-          <BlogCard key={post.id}>
+          <BlogCard key={post.id} post={post}>
             <Link to={`/post/${post.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
               <BlogTitle>{post.title}</BlogTitle>
               <p>{post.content.substring(0, 100)}...</p>

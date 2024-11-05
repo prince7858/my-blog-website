@@ -1,43 +1,37 @@
+// src/components/NavBar.js
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-const NavContainer = styled.nav`
+const NavBarContainer = styled.nav`
+  background: #6c63ff;
+  padding: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 2rem;
-  background-color: #6c63ff;
-  color: white;
-`;
-
-const NavLinks = styled.div`
-  display: flex;
-  gap: 1.5rem;
 `;
 
 const NavLink = styled(Link)`
   color: white;
   text-decoration: none;
-  font-weight: bold;
+  margin: 0 1rem;
   &:hover {
-    color: #f0f0f0;
+    text-decoration: underline;
   }
 `;
 
 const NavBar = () => {
   return (
-    <NavContainer>
-      <h1>My Blog</h1>
-      <NavLinks>
+    <NavBarContainer>
+      <h1 style={{ color: 'white' }}>My Blog</h1>
+      <div>
         <NavLink to="/">Home</NavLink>
-        <NavLink to="/blogs">Blogs</NavLink>
-        <NavLink to="/about">About</NavLink>
-        <NavLink to="/contact">Contact</NavLink>
-        <NavLink to="/login">Sign In</NavLink>
+        <NavLink to="/login">Login</NavLink>
         <NavLink to="/register">Register</NavLink>
-      </NavLinks>
-    </NavContainer>
+        <NavLink to="/admin">Admin</NavLink>
+        <NavLink to="/contact">Contact</NavLink>
+      </div>
+    </NavBarContainer>
   );
 };
 

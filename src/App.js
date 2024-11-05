@@ -1,49 +1,30 @@
-// App.js
+// src/App.js
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import NavBar from './components/NavBar';
 import HomePage from './pages/HomePage';
 import BlogPost from './pages/BlogPost';
 import AdminDashboard from './pages/AdminDashboard';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import Profile from './pages/Profile';
-import styled from 'styled-components';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
+import ContactPage from './pages/ContactPage';
+import Footer from './components/Footer';
 
-
-// Create a Header Component
-const Header = styled.header`
-  background: #6c63ff;
-  padding: 1rem;
-  color: white;
-  text-align: center;
-`;
-
-const Footer = styled.footer`
-  background: #6c63ff;
-  padding: 1rem;
-  color: white;
-  text-align: center;
-`;
-
-// Update App.js to include Header and Footer
-function App() {
+const App = () => {
   return (
     <Router>
-      <Header role="banner" aria-label="Blog Header">
-        <h1>My Blog</h1>
-      </Header>
+      <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/post/:id" element={<BlogPost />} />
         <Route path="/admin" element={<AdminDashboard />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
+        <Route path="/contact" element={<ContactPage />} /> {/* Add the route here */}
       </Routes>
-      <Footer role="contentinfo" aria-label="Blog Footer">
-        <p>&copy; {new Date().getFullYear()} My Blog. All Rights Reserved.</p>
-      </Footer>
+      <Footer />
     </Router>
   );
-}
+};
 
 export default App;

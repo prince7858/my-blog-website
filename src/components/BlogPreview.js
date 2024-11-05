@@ -1,7 +1,7 @@
 // components/BlogPreview.js
 import React, { useEffect, useState} from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 const BlogContainer = styled.section`
   padding: 2rem;

@@ -1,6 +1,7 @@
 // pages/Profile.js
 import React from 'react';
 import styled from 'styled-components';
+import Skills from '../components/Skills';
 
 const ProfileContainer = styled.div`
   padding: 2rem;

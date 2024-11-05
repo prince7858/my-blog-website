@@ -1,34 +1,30 @@
-// pages/AdminDashboard.js
+// src/pages/AdminDashboard.js
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { useNavigate } from 'react-router-dom';
 
-const DashboardContainer = styled.div`
+const AdminContainer = styled.div`
   padding: 2rem;
-`;
-
-const Title = styled.h1`
-  text-align: center;
+  max-width: 800px;
+  margin: auto;
 `;
 
 const PostForm = styled.form`
   display: flex;
   flex-direction: column;
-  max-width: 600px;
-  margin: auto;
+  margin-bottom: 2rem;
 `;
 
 const Input = styled.input`
-  margin: 0.5rem 0;
+  margin-bottom: 1rem;
   padding: 0.5rem;
 `;
 
-const TextArea = styled.textarea`
-  margin: 0.5rem 0;
+const Textarea = styled.textarea`
+  margin-bottom: 1rem;
   padding: 0.5rem;
 `;
 
-const SubmitButton = styled.button`
+const Button = styled.button`
   padding: 0.5rem;
   background: #6c63ff;
   color: white;
@@ -36,41 +32,78 @@ const SubmitButton = styled.button`
   cursor: pointer;
 `;
 
+const PostList = styled.div`
+  border-top: 1px solid #ccc;
+  padding-top: 1rem;
+`;
+
+const PostItem = styled.div`
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+`;
+
 const AdminDashboard = () => {
-  const navigate = useNavigate();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [posts, setPosts] = useState([]);
+  const [editingPostId, setEditingPostId] = useState(null);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you would send data to the backend or update your state
-    console.log('New Post:', { title, content });
-    // Clear the form
+    if (editingPostId) {
+      const updatedPosts = posts.map(post =>
+        post.id === editingPostId ? { ...post, title, content } : post
+      );
+      setPosts(updatedPosts);
+      setEditingPostId(null);
+    } else {
+      const newPost = { id: Date.now(), title, content };
+      setPosts([...posts, newPost]);
+    }
     setTitle('');
     setContent('');
   };
 
+  const handleEdit = (post) => {
+    setTitle(post.title);
+    setContent(post.content);
+    setEditingPostId(post.id);
+  };
+
+  const handleDelete = (id) => {
+    setPosts(posts.filter(post => post.id !== id));
+  };
+
   return (
-    <DashboardContainer>
-      <Title>Admin Dashboard</Title>
+    <AdminContainer>
+      <h2>Admin Dashboard</h2>
       <PostForm onSubmit={handleSubmit}>
         <Input
           type="text"
           placeholder="Post Title"
           value={title}
           onChange={(e) => setTitle(e.target.value)}
-          required
         />
-        <TextArea
+        <Textarea
           rows="5"
           placeholder="Post Content"
           value={content}
           onChange={(e) => setContent(e.target.value)}
-          required
         />
-        <SubmitButton type="submit">Create Post</SubmitButton>
+        <Button type="submit">{editingPostId ? 'Update Post' : 'Create Post'}</Button>
       </PostForm>
-    </DashboardContainer>
+      <PostList>
+        {posts.map(post => (
+          <PostItem key={post.id}>
+            <h3>{post.title}</h3>
+            <p>{post.content}</p>
+            <Button onClick={() => handleEdit(post)}>Edit</Button>
+            <Button onClick={() => handleDelete(post.id)}>Delete</Button>
+          </PostItem>
+        ))}
+      </PostList>
+    </AdminContainer>
   );
 };
 
