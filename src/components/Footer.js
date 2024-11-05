@@ -6,9 +6,11 @@ import { faGithub, faLinkedin, faTwitter } from '@fortawesome/free-brands-svg-ic
 
 const FooterContainer = styled.footer`
   padding: 1rem;
-  background: #222;
+  background: #333;
+  color: #fff;
   text-align: center;
-  color: white;
+  width: 100%;
+  margin-top: auto; // Ensures it sticks to the bottom
 `;
 
 const SocialIcon = styled(FontAwesomeIcon)`
@@ -30,6 +32,7 @@ const Footer = () => (
       <SocialIcon icon={faLinkedin} title="LinkedIn" />
       <SocialIcon icon={faTwitter} title="Twitter" />
     </div>
+    <p>© 2024 Your Blog Website</p>
   </FooterContainer>
 );
 

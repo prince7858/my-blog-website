@@ -83,6 +83,7 @@ const goToTop = () => {
       />
 
       <BlogContainer>
+        <BlogPreview />
         {filteredPosts.map(post => (
           <BlogCard key={post.id} post={post}>
             <Link to={`/post/${post.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
