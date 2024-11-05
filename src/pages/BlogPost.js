@@ -93,7 +93,14 @@ const BlogPost = () => {
 
   const post = posts.find((p) => p.id === id);
 
-  if (!post) return <p>Post not found!</p>;
+  if (!post) {
+    return (
+      <p style={{ textAlign: 'center' }} aria-live="polite">
+        <strong>Post not found!</strong>
+        <GoBackButton onClick={() => navigate('/')}>Go Back</GoBackButton>
+      </p>
+    );
+  }  
 
   const handleCommentSubmit = (e) => {
     e.preventDefault();

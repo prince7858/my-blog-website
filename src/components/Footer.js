@@ -28,11 +28,16 @@ const Footer = () => (
   <FooterContainer>
     <p>Connect with me</p>
     <div>
-      <SocialIcon icon={faGithub} title="GitHub" />
-      <SocialIcon icon={faLinkedin} title="LinkedIn" />
-      <SocialIcon icon={faTwitter} title="Twitter" />
-    </div>
-    <p>© 2024 Your Blog Website</p>
+    <a href="https://github.com/prince7858" target="_blank" rel="noopener noreferrer">
+        <SocialIcon icon={faGithub} title="GitHub" />
+    </a>
+    <a href="https://www.linkedin.com/in/prince-singh-2021/" target="_blank" rel="noopener noreferrer">
+        <SocialIcon icon={faLinkedin} title="LinkedIn" />
+    </a>
+    <a href="https://twitter.com/yourusername" target="_blank" rel="noopener noreferrer">
+        <SocialIcon icon={faTwitter} title="Twitter" />
+    </a>
+</div>    <p>© 2024 Your Blog Website</p>
   </FooterContainer>
 );
 

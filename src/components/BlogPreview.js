@@ -32,7 +32,7 @@ const BlogPreview = () => {
       fetch('https://jsonplaceholder.typicode.com/posts')
         .then(response => response.json())
         .then(data => {
-          const transformedPosts = data.slice(0, 5).map(post => ({
+          const transformedPosts = data.slice(0, 10).map(post => ({
             id: post.id,
             title: post.title,
             content: post.body,
